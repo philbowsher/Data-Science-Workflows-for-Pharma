@@ -1,0 +1,116 @@
+---
+title: "Immunogenicity - Reporting Positive Samples"
+output: html_document
+params:
+  screening_cut_point: 200
+  confirmatory_cut_point: 20
+---
+
+ADA _three‐tiered_ testing strategy is deployed here to assess ADA. Set screening and confirmatory cut-points in the rmd file at top.
+
+### ADA Three‐tiered Testing Method
+
+## Example one
+
+The Screening cut-point is: `r params$screening_cut_point`
+
+The Confirmatory cut-point is: `r params$confirmatory_cut_point`
+
+```{r, echo=FALSE, include=FALSE, message=FALSE, warning=FALSE}
+#packages
+library(tidyverse)
+library(magrittr)
+library(stringr)
+library(plotly)
+library(crosstalk)
+library(DT)
+```
+
+# Screening Data
+```{r, message=FALSE, warning=FALSE, include=FALSE,}
+
+# readr
+Screening <- read_csv("Sample_ADA_Data_05062017_Screening.csv") %>% mutate(Screening_Cutpoint = params$screening_cut_point) %>%
+  mutate(Screening_Result_Drug = ifelse(Signal_Response_No_Drug > Screening_Cutpoint, "Positive", "Negative")) %>% mutate(Signal_Response_No_Drug_log10 = log10(Signal_Response_No_Drug)) %>% filter(Screening_Result_Drug=="Positive")
+
+datatable(Screening, options = list(pageLength = 10))
+```
+
+# Confirmatory Data
+```{r, message=FALSE, warning=FALSE, include=FALSE,}
+
+# readr
+Confirmatory <- read_csv("Sample_ADA_Data_05062017_Confirmatory.csv")
+
+Screening_Confirmatory <- Screening %>%
+  left_join(Confirmatory, by = 'Sample_Number') %>%
+mutate(Signal_Response_Difference = Signal_Response_No_Drug - Signal_Response_Drug)  %>% mutate(Signal_Response_Divide = Signal_Response_Difference / Signal_Response_No_Drug)  %>%
+  mutate(Percent_Signal_Inhibition_Drug = Signal_Response_Divide * 100) %>% mutate(Confirmatory_Cutpoint = params$confirmatory_cut_point) %>%
+  mutate(Confirmatory_Result_Drug = ifelse(Percent_Signal_Inhibition_Drug > Confirmatory_Cutpoint, "Positive", "Negative")) %>% select(-Signal_Response_Difference, -Signal_Response_Divide)%>% filter(Confirmatory_Result_Drug=="Positive")
+
+datatable(Screening_Confirmatory, options = list(pageLength = 10))
+
+```
+
+# Add Titer to Confirmatory Data
+```{r, message=FALSE, warning=FALSE, include=FALSE,}
+
+Titer <- read_csv("Sample_ADA_Data_05062017_Titer.csv")
+
+Screening_Confirmatory_Titer <- Screening_Confirmatory %>%
+  left_join(Titer, by = 'Sample_Number') 
+
+# %>% filter(Screening_Result_Drug=="Positive" & Confirmatory_Result_Drug=="Positive")
+
+datatable(Screening_Confirmatory_Titer, options = list(pageLength = 10))
+
+```
+
+Plots of positive screening signal response and percent signal inhibition & screening signal response and titer
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+d <- SharedData$new(Screening_Confirmatory_Titer)
+s <- subplot(
+  qplot(data = d, x = Signal_Response_No_Drug, y = Percent_Signal_Inhibition_Drug),
+  qplot(data = d, x = Signal_Response_No_Drug, y = Reported_Titer)
+)
+
+highlight(s, "plotly_selected")
+```
+
+Plot of Postive Signal_Response_No_Drug and Percent_Signal_Inhibition_Drug
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+p <- qplot(Signal_Response_No_Drug, Percent_Signal_Inhibition_Drug, data=Screening_Confirmatory_Titer, colour=Screening_Result_Drug)
+
+p <- ggplotly(p)
+
+p
+```
+
+Distribution of Signal_Response_No_Drug for true positives
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+p = ggplot(Screening_Confirmatory_Titer, aes(x=Signal_Response_No_Drug)) +
+    geom_histogram(aes(y = ..density..), binwidth=density(Screening_Confirmatory_Titer$Signal_Response_No_Drug)$bw) +
+    geom_density(fill="red", alpha = 0.2)
+
+p = ggplotly(p)
+
+p
+
+```
+
+Distribution of Signal_Response_No_Drug Log 10 transformed for true positives
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+p = ggplot(Screening_Confirmatory_Titer, aes(x=Signal_Response_No_Drug_log10)) +
+    geom_histogram(aes(y = ..density..), binwidth=density(Screening_Confirmatory_Titer$Signal_Response_No_Drug_log10)$bw) +
+    geom_density(fill="red", alpha = 0.2)
+
+p = ggplotly(p)
+
+p
+
+```
+
+

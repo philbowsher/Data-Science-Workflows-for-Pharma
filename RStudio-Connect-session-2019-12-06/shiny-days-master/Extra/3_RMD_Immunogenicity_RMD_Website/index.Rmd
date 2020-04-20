@@ -1,0 +1,37 @@
+---
+title: ADA Three‐Tiered Testing Strategy
+---
+
+This website is a POC *Immunogenicity Website* in which the R capabilities of various tools/packages are used to three‐tiered testing strategy is deployed here to **assess ADA**---a website fully conceived within a digital environment---instead of a **self-run report** that simply is an outputted html file.
+
+### About
+
+A brief explanation of the analysis and how this website was developed. The data are simulated example data sets for deploying the three‐tiered testing strategy.
+
+This repository contains 3 data sets in csv format, that are SIMULATED, assuming lognormal distributions. The values in, and structures of the data as well as any potential conclusions or parameter estimates do not correspond to any real experiment. The purpose of the data sets is merely to illustrate possible (or inadequate) data structures and possible application of the various user interfaces and applications for assessing ADA.
+
+### References
+
+A collection of external references that users might find useful. Where possible, links to the sources are included.
+
+@Book{xie2015,
+  title = {Dynamic Documents with {R} and knitr},
+  author = {Yihui Xie},
+  publisher = {Chapman and Hall/CRC},
+  address = {Boca Raton, Florida},
+  year = {2015},
+  edition = {2nd},
+  note = {ISBN 978-1498716963},
+  url = {http://yihui.name/knitr/},
+}
+
+@article{shankar2014assessment,
+  title={Assessment and reporting of the clinical immunogenicity of therapeutic proteins and peptides-harmonized terminology and tactical recommendations},
+  author={Shankar, Gopi and Arkin, S and Cocea, L and Devanarayan, V and Kirshner, S and Kromminga, A and Quarmby, V and Richards, S and Schneider, CK and Subramanyam, M and others},
+  journal={The AAPS journal},
+  volume={16},
+  number={4},
+  pages={658--673},
+  year={2014},
+  publisher={Springer}
+}

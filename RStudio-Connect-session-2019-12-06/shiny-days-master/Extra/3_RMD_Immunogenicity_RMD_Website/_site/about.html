@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>About</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 64px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+
+.section h2 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h3 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h4 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h5 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h6 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Immunogenicity-RMarkdown-Website</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Notes
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="ImportantConcepts.html">Notes</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Tiers_Reporting
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Tiers.html">ADA Assessment</a>
+    </li>
+    <li>
+      <a href="Reporting.html">Reporting</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="links.html">Resources</a>
+</li>
+<li>
+  <a href="Tiers.html">Tiers</a>
+</li>
+<li>
+  <a href="Reporting.html">Reporting</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">About</h1>
+
+</div>
+
+
+<ul>
+<li>Client name: XYZ biologics, LLC (Formerly known as ABC Proteins, LLC)</li>
+<li>XYZ Study No. CA123456</li>
+</ul>
+<p>Therapeutic proteins have the potential to elicit an immune response when administered to patients. An important aspect of developing these medicines is to understand the immunogenicity and to be able to communicate this information to patients, prescribers, and regulators.</p>
+<p>Anti-drug antibodies (ADA) have been implicated in infusion reactions and anaphylaxis as well as immune complex-mediated disease. ADA have also caused secondary treatment failures (loss of efficacy) and, in rare occasions, more serious thrombocytopenia and pure red cell aplasia. Therefore, ADA are a medical concern in terms of safety and long-term efficacy of the drug and it is critical to evaluate their development in all patients during clinical studies, not just in a symptom-driven manner. With a goal of guiding medical practice, the elucidation of ADA responses and their characteristics relative to clinical consequences is vital <span class="citation">[@shankar2014assessment]</span>.</p>
+<p>ADA comprises neutralizing and non-neutralizing ADA. Other terms that have been used for ADA include anti-therapeutic antibody (ATA), anti-product antibody (APA), or anti-biologic antibody (ABA).</p>
+<ul>
+<li><p>Neutralizing ADA (NAb): ADA that inhibits or reduces the pharmacological activity of the biologic drug molecule, as determined by an <em>in vitro</em> test or animal-based bioassay method, regardless of its <em>in vitro</em> clinical relavence (i.e., whether or not test method results relate to clinical impact in the subject).</p></li>
+<li><p>Non-neutralizing ADA (non-neutralizing antibody, non- NAb): ADA that binds to the biologic drug molecule but does not inhibit its pharmacological activity in an in vitro test or animal-based bioassay method, regardless of its in vivo clinical relevance (i.e., whether or not test method results relate to clinical impact in the subject).</p></li>
+</ul>
+<p>ADA three‐tiered testing strategy is deployed here to assess ADA.</p>
+<div id="statistical-analysis" class="section level2">
+<h2>Statistical Analysis</h2>
+<p>ADA Three‐tiered Testing Strategy</p>
+<p>ADA Positive Sample: when ADA is detected in a sample, the sample is considered positive.</p>
+<p>Anti-drug antibody (ADA): Biologic drug-reactive antibody, including pre-existing host antibodies that are cross-reactive with the administered biologic drug (baseline ADA).</p>
+</div>
+<div id="the-following-tools-were-used-to-develop-this-site" class="section level2">
+<h2>The following tools were used to develop this site:</h2>
+<ul>
+<li><a href="https://www.r-project.org/"><code>R</code></a>: <code>R</code> is a software language and programming environment for statistical computing and for the graphical analysis of data.</li>
+<li><a href="http://rmarkdown.rstudio.com/index.html"><code>Rmarkdown</code></a>: <code>Rmarkdown</code> is a package for <code>R</code> that combines simple <code>markdown</code> authoring tools for formatting text with chunks of <code>R</code> code; when compiled using <a href="http://yihui.name/knitr/"><code>knitr</code></a> the resulting output is a formatted document that contains the results of executing the embedded <code>R</code> code. Although <code>Rmarkdown</code> can produce files in a variety of formats, the two of particular interest in this project are <code>html</code> and <code>pdf</code> formats.</li>
+<li><a href="https://www.rstudio.com/home/"><code>RStudio</code></a>: <code>RStudio</code> is an integrated development environment that, among other features, provides a console for running <code>R</code>, a window for editing files, a window for managing files, a window for viewing plots, a window for viewing help files, and an internal browser window of viewing dynamic content. <code>RStudio</code> also provides tools for automating many tasks. Although <code>RStudio</code> is a convenient way to manage this project, it is not a requirement as it simply provides a way to work with <code>R</code> and <code>Rmarkdown</code>.</li>
+<li><code>R Packages</code>: One of the strengths of <code>R</code> is the availability of packages of <code>R</code> functions that are designed to work with data. The materials in this project, for example, use the <a href="http://rmarkdown.rstudio.com/flexdashboard/index.html"><code>flexdashboard</code></a> package to create some dashboards, <a href="https://cran.r-project.org/web/packages/quantmod/index.html"><code>quantmod</code></a> and the <a href="https://rstudio.github.io/dygraphs/"><code>dygraphs</code></a> packages to create interactive stock reports.</li>
+</ul>
+<p>See the link below for more info:</p>
+<p><a href="http://rmarkdown.rstudio.com/rmarkdown_websites.html" class="uri">http://rmarkdown.rstudio.com/rmarkdown_websites.html</a></p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

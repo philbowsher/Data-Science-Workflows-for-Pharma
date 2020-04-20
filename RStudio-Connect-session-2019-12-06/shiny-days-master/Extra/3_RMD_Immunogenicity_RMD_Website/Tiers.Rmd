@@ -1,0 +1,71 @@
+---
+title: "Immunogenicity - Tiered Approuch to Assess ADA	Positive Samples"
+output: html_document
+params:
+  screening_cut_point: 200
+  confirmatory_cut_point: 20
+---
+
+ADA _three‐tiered_ testing strategy is deployed here to assess ADA. Set screening and confirmatory cut-points in the rmd file at top.
+
+### ADA Three‐tiered Testing Method
+
+## Example one
+
+The Screening cut-point is: `r params$screening_cut_point`
+
+The Confirmatory cut-point is: `r params$confirmatory_cut_point`
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+#packages
+library(tidyverse)
+library(magrittr)
+library(stringr)
+library(plotly)
+library(crosstalk)
+library(DT)
+```
+
+# Screening Data
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+# readr
+Screening <- read_csv("Sample_ADA_Data_05062017_Screening.csv") %>% mutate(Screening_Cutpoint = params$screening_cut_point) %>%
+  mutate(Screening_Result_Drug = ifelse(Signal_Response_No_Drug > Screening_Cutpoint, "Positive", "Negative")) %>% mutate(Signal_Response_No_Drug_log10 = log10(Signal_Response_No_Drug)) %>% filter(Screening_Result_Drug=="Positive")
+
+datatable(Screening, options = list(pageLength = 10))
+```
+
+# Confirmatory Data
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+# readr
+Confirmatory <- read_csv("Sample_ADA_Data_05062017_Confirmatory.csv")
+
+Screening_Confirmatory <- Screening %>%
+  left_join(Confirmatory, by = 'Sample_Number') %>%
+mutate(Signal_Response_Difference = Signal_Response_No_Drug - Signal_Response_Drug)  %>% mutate(Signal_Response_Divide = Signal_Response_Difference / Signal_Response_No_Drug)  %>%
+  mutate(Percent_Signal_Inhibition_Drug = Signal_Response_Divide * 100) %>% mutate(Confirmatory_Cutpoint = params$confirmatory_cut_point) %>%
+  mutate(Confirmatory_Result_Drug = ifelse(Percent_Signal_Inhibition_Drug > Confirmatory_Cutpoint, "Positive", "Negative")) %>% select(-Signal_Response_Difference, -Signal_Response_Divide)%>% filter(Confirmatory_Result_Drug=="Positive")
+
+datatable(Screening_Confirmatory, options = list(pageLength = 10))
+
+```
+
+# Add Titer to Confirmatory Data
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+Titer <- read_csv("Sample_ADA_Data_05062017_Titer.csv")
+
+Screening_Confirmatory_Titer <- Screening_Confirmatory %>%
+  left_join(Titer, by = 'Sample_Number') 
+
+# %>% filter(Screening_Result_Drug=="Positive" & Confirmatory_Result_Drug=="Positive")
+
+datatable(Screening_Confirmatory_Titer, options = list(pageLength = 10))
+
+```
+
+
+
+

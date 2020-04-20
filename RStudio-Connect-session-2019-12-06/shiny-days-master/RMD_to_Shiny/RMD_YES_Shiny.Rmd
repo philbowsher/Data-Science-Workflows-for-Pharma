@@ -1,0 +1,89 @@
+---
+title: "ggplot2 Diamonds Explorer"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    social: menu
+    source_code: embed
+    logo: PB.jpg
+runtime: shiny
+---
+
+```{r global, include=FALSE}
+# load data in 'global' chunk so it can be shared by all users of the dashboard
+library(tidyverse)
+library(mgcv)
+library(plotly)
+library(DT)
+# this is needed for Shiny
+dataset1 <- read_csv("ToothGrowth.csv") %>% mutate( supp = factor(supp))
+data <- read_csv("ToothGrowth.csv") %>% mutate( supp = factor(supp))
+
+
+
+# %>% mutate( SEX = factor(supp))
+```
+
+# Page 1
+
+Inputs {.sidebar}
+-----------------------------------------------------------------------
+
+```{r}
+
+#Change for your dataset
+
+sliderInput('sampleSize', 'Sample Size', min=1, max=nrow(dataset1),
+            value=min(1000, nrow(dataset1)), step=500, round=0)
+
+checkboxInput('jitter', 'Jitter', value = TRUE)
+checkboxInput('smooth', 'Smooth', value = TRUE)
+
+selectInput('x', 'X', names(dataset1))
+selectInput('y', 'Y', names(dataset1), names(dataset1)[[2]])
+selectInput('color', 'Color', c('None', names(dataset1)))
+
+selectInput('facet_row', 'Facet Row',
+            c(None='.', names(dataset1[sapply(dataset1, is.factor)])))
+selectInput('facet_col', 'Facet Column',
+            c(None='.', names(dataset1[sapply(dataset1, is.factor)])))
+```
+
+Outputs
+-----------------------------------------------------------------------
+
+### Diamonds
+
+```{r}
+dataset <- reactive({
+  data[sample(nrow(data), input$sampleSize),]
+})
+
+renderPlotly({
+  p <- ggplot(dataset(), aes_string(x=input$x, y=input$y)) + geom_point()
+  
+  if (input$color != 'None')
+    p <- p + aes_string(color=input$color)
+  
+  facets <- paste(input$facet_row, '~', input$facet_col)
+  if (facets != '. ~ .')
+    p <- p + facet_grid(facets)
+  
+  if (input$jitter)
+    p <- p + geom_jitter()
+  if (input$smooth)
+    p <- p + geom_smooth()
+  
+  print(p)
+})
+```
+
+
+
+# Page 2
+
+```{r}
+renderDataTable({
+  dataset()
+}, options = list(scrollY = "750px"))
+```

@@ -1,0 +1,39 @@
+---
+title: "ggplot2 Diamonds Explorer"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    social: menu
+    source_code: embed
+---
+
+```{r global, include=FALSE}
+# load data in 'global' chunk so it can be shared by all users of the dashboard
+library(tidyverse)
+library(mgcv)
+library(plotly)
+# this is needed for Shiny
+# dataset <- diamonds
+data <- diamonds
+```
+
+### Diamonds
+
+```{r}
+#Set diamonds to 2000 rows
+dataset <- data[sample(nrow(data), 2000), ] 
+
+#Create P object to hold ggplot output
+  p <- ggplot(dataset, aes(x=carat, y=cut)) + geom_point()
+  
+  p <- p + aes(color=color)
+  
+  p <- p + facet_grid(color ~ clarity)
+  
+  p <- p + geom_jitter()
+
+  p <- p + geom_smooth()
+
+#This resizes the page and makes interactive!
+ggplotly(p)
+```

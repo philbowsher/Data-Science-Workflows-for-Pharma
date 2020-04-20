@@ -1,0 +1,203 @@
+---
+title: <span style="color:navy">RStudio</span> <span style="color:#FFFFFF">Connect</span>
+
+author: <span style="color:#FFFFFF">twitter:@rinpharma github:philbowsher</span>
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [ "include/rstudio.css" ]
+    nature:
+      countIncrementalSlides: yes
+      highlightLines: yes
+      highlightStyle: github
+      ratio: 16:9
+resource_files:
+  - include
+  - images
+---
+
+
+```{r, include=FALSE}
+rmarkdown::output_metadata$set(
+  rsc_output_files = list.files("images", recursive = TRUE, full.names = TRUE)
+)
+```
+
+class: subtitle-slide, white, middle, center
+
+# I have always been inspired by those who can capture the landscape with a minimum of brushstrokes
+
+---
+
+
+class: panel-narrow-slide, left
+
+# Workshop Learning Objectives
+- ggplot2
+- RMD & Notebooks
+- Parameters in Rmarkdown
+- Publishing to RSC
+- RSC Parameters
+- RSC Scheduling
+- RSC Emails
+- Flexdashboard
+- Shiny
+---
+
+class: panel-narrow-slide, left
+
+# Workshop Communication
+- http://slido.com/
+- code is #56953
+- You will not learn all of R today
+---
+
+class: panel-narrow-slide, left
+
+# Your Turn
+- Form groups of 2-4 people
+- Introduce yourself to your group members
+- Who you are
+- What you do with data
+- How long you have been using R
+
+---
+
+class: subtitle-slide, white, middle, center
+
+# http://rstd.io/phil-me-out
+
+---
+
+class: panel-narrow-slide, left
+
+# Setup
+- https://github.com/sol-eng/classroom-getting-started
+- http://rstd.io/class
+
+---
+
+class: panel-narrow-slide, left
+
+# After the workshop, go here
+- https://rstudio.cloud/project/395212
+
+---
+
+class: panel-narrow-slide, left
+
+# By the Way, Books…
+- https://mastering-shiny.org/
+- http://r4ds.had.co.nz & https://rstudio.cloud/
+- https://r-graphics.org/
+- http://www-bcf.usc.edu/~gareth/ISL/
+- http://appliedpredictivemodeling.com/
+- https://bookdown.org/yihui/rmarkdown/
+- https://www.tidytextmining.com/
+- https://adv-r.hadley.nz/
+- https://plotly-r.com/
+- https://therinspark.com/
+---
+
+class: subtitle-slide, white, middle, center
+
+# Open README in shiny-days-master Folder
+- I will walk through it
+
+---
+
+class: subtitle-slide, white, middle, center
+
+# ggplot2 01-adverse-events-plots.R
+- Open adverse with esquisse before you run the ggplot2 code
+
+---
+
+class: panel-narrow-slide, left
+
+# Deploy ggplot2 To RStudio Connect
+- http://ec2-52-15-220-29.us-east-2.compute.amazonaws.com/rsconnect/
+
+---
+
+class: subtitle-slide, white, middle, center
+
+# 02_building_blocks.Rmd
+- Take your R code and create a workflow in a R notebook
+- Publish to RSC
+---
+
+
+class: subtitle-slide, white, middle, center
+
+# 03-flexdashboard-skeleton.Rmd
+
+---
+
+class: subtitle-slide, white, middle, center
+
+# 04-adverse-events.Rmd
+- Publish to RSC
+
+---
+
+class: subtitle-slide, white, middle, center
+
+# RMD_NO_Shiny.Rmd
+- Let's covert this to a Shiny App
+
+---
+
+class: subtitle-slide, white, middle, center
+
+# 05-adverse-events-shiny.Rmd
+- Publish to RSC
+
+---
+
+
+class: panel-narrow-slide, left
+
+# Emails in  RStudio Connect
+- https://rviews.rstudio.com/2019/09/04/how-to-send-custom-e-mails-with-rstudio-connect/
+- blastula::prepare_rsc_example_files()
+- connect_examples Folder
+- connect-example-main.Rmd
+- View last code chunk
+- Deploy to RStudio Connect
+- /webmail/?_task=mail&_mbox=INBOX
+---
+
+
+class: panel-narrow-slide, left
+
+# Python & Git
+- https://blog.rstudio.com/2019/06/24/rstudio-connect-1-7-6/
+- https://solutions.rstudio.com/python/overview/
+- https://github.com/sol-eng/python-examples
+- https://github.com/sol-eng/python-examples/tree/master/jupyter-static-visualization
+- In RSC, go to New Content, and click New Content from Git Repository
+---
+
+
+class: panel-narrow-slide, left
+
+# APIs in RSC
+- https://solutions.rstudio.com/examples/tensorflow-overview/
+- https://solutions.rstudio.com/examples/rest-apis-overview/
+- Open FDA
+---
+
+class: panel-narrow-slide, left
+
+# Pins in RSC
+- https://blog.rstudio.com/2019/09/23/rstudio-connect-1-7-8-put-a-pin-in-it/
+---
+
+
+class: subtitle-slide, white, middle, center
+
+# rstudio conference & rinpharma
+
+
+

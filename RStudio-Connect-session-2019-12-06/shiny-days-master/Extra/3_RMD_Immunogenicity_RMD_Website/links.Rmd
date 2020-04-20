@@ -1,0 +1,34 @@
+---
+title: "External Resources"
+output: html_document
+---
+
+### General Reference Texts
+
+## Statistical Analysis
+
+The cut-off values to determine whether a subject has *POSITIVE* or *NEGATIVE* ADA result are the screening cutpoint and confirmatory cutpoint. Please see here for more information:
+
+Recommendations for the validation of immunoassays used for detection of host antibodies against biotechnology products.
+
+https://www.ncbi.nlm.nih.gov/pubmed/18993008
+
+Other documents include:
+
+The quintessence of immunogenicity reporting for biotherapeutics
+
+http://www.nature.com/nbt/journal/v33/n4/full/nbt.3181.html?message-global=remove
+
+Assay Development and Validation for Immunogenicity Testing of Therapeutic Protein Products
+
+https://www.fda.gov/downloads/Drugs/Guidances/UCM192750.pdf
+
+Assessment and Reporting of the Clinical Immunogenicity of Therapeutic Proteins and Peptides – Harmonized Terminology and Tactical Recommendation
+
+https://www.ncbi.nlm.nih.gov/pubmed/24764037
+
+http://www.e-i-p.eu/wp-content/uploads/2013/01/Devanarayan_EIP_Leiden_2009.pdf
+
+Cut points in immunogenicity assays are used to classify future specimens into anti-drug antibody (ADA) positive or negative. Five phenomena may complicate the statistical cut point estimation and are further explained here:
+
+https://www.ncbi.nlm.nih.gov/pubmed/25733352

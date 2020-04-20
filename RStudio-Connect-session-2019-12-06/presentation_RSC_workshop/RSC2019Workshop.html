@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>RStudio Connect</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="twitter:@rinpharma github:philbowsher" />
+    <link rel="stylesheet" href="include/rstudio.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# <span style="color:navy">RStudio</span> <span style="color:#FFFFFF">Connect</span>
+### <span style="color:#FFFFFF">twitter:<span class="citation">@rinpharma</span> github:philbowsher</span>
+
+---
+
+
+
+
+
+class: subtitle-slide, white, middle, center
+
+# I have always been inspired by those who can capture the landscape with a minimum of brushstrokes
+
+---
+
+class: subtitle-slide, white, middle, center
+
+# https://www.linkedin.com/pulse/its-nonlinear-world-interactive-dashboard-edgar-ruiz/
+
+---
+
+class: panel-narrow-slide, left
+
+# Workshop Communication
+- http://slido.com/
+- code is 2773
+- You will not learn all of R today
+---
+
+class: panel-narrow-slide, left
+
+# Your Turn
+- Form groups of 2-4 people
+- Introduce yourself to your group members
+- Who you are
+- What you do with data
+- How long you have been using R
+
+---
+
+class: subtitle-slide, white, middle, center
+
+# http://rstd.io/phil-me-out
+
+---
+
+class: panel-narrow-slide, left
+
+# Setup
+- https://github.com/sol-eng/classroom-getting-started
+- http://rstd.io/class
+
+---
+
+class: panel-narrow-slide, left
+
+# After the workshop, go here
+- https://rstudio.cloud/project/395212
+
+---
+
+class: panel-narrow-slide, left
+
+# By the Way, Books…
+- https://mastering-shiny.org/
+- http://r4ds.had.co.nz &amp; https://rstudio.cloud/
+- https://r-graphics.org/
+- http://www-bcf.usc.edu/~gareth/ISL/
+- http://appliedpredictivemodeling.com/
+- https://bookdown.org/yihui/rmarkdown/
+- https://www.tidytextmining.com/
+- https://adv-r.hadley.nz/
+---
+
+class: subtitle-slide, white, middle, center
+
+# Open README in shiny-days-master Folder
+
+---
+
+class: subtitle-slide, white, middle, center
+
+# 01-adverse-events-plots.R
+
+---
+
+class: panel-narrow-slide, left
+
+# Deploy To RStudio Connect
+- http://ec2-52-15-220-29.us-east-2.compute.amazonaws.com/rsconnect/
+
+---
+
+class: subtitle-slide, white, middle, center
+
+# 02_building_blocks.Rmd
+
+---
+
+
+class: subtitle-slide, white, middle, center
+
+# 03-flexdashboard-skeleton.Rmd
+
+---
+
+class: subtitle-slide, white, middle, center
+
+# 04-adverse-events.Rmd
+
+---
+
+class: subtitle-slide, white, middle, center
+
+# 05-adverse-events-shiny.Rmd
+
+---
+
+
+class: subtitle-slide, white, middle, center
+
+# Part 2 Advanced RStudio Connect
+
+---
+
+
+class: panel-narrow-slide, left
+
+# Emails in  RStudio Connect
+- https://rviews.rstudio.com/2019/09/04/how-to-send-custom-e-mails-with-rstudio-connect/
+- blastula::prepare_rsc_example_files()
+- connect_examples Folder
+- connect-example-main.Rmd
+- View last code chunk
+- Deploy to RStudio Connect
+- /webmail/?_task=mail&amp;_mbox=INBOX
+---
+
+
+class: panel-narrow-slide, left
+
+# Python &amp; Git
+- https://blog.rstudio.com/2019/06/24/rstudio-connect-1-7-6/
+- https://solutions.rstudio.com/python/overview/
+- https://github.com/sol-eng/python-examples
+- https://github.com/sol-eng/python-examples/tree/master/jupyter-static-visualization
+- In RSC, go to New Content, and click New Content from Git Repository
+---
+
+
+class: panel-narrow-slide, left
+
+# APIs in RSC
+- https://solutions.rstudio.com/examples/tensorflow-overview/
+- https://solutions.rstudio.com/examples/rest-apis-overview/
+- Open FDA
+---
+
+class: panel-narrow-slide, left
+
+# Pins in RSC
+- https://blog.rstudio.com/2019/09/23/rstudio-connect-1-7-8-put-a-pin-in-it/
+---
+
+
+class: subtitle-slide, white, middle, center
+
+# rstudio conference &amp; rinpharma
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"countIncrementalSlides": true,
+"highlightLines": true,
+"highlightStyle": "github",
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

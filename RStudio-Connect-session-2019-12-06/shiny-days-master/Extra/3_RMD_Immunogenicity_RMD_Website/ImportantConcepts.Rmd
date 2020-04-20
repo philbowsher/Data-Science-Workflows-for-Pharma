@@ -1,0 +1,48 @@
+---
+title: "ADA Three‐Tiered Approach"
+output: 
+  html_document: 
+    toc: yes
+    toc_depth: 6
+---
+
+The goal of this study is to compare immunogenicity of humgensity12345 (new drug) after subcutaneous (SC) administrations in healthy subjects.  ADA levels for humgensity12345 were estimated to evaluate potential difference between the two products in the incidence of human immune responses.
+
+This is a one center, single-blind, randomized, parallel, multiple-dose, safety and immunogenicity study. A total number of one hundred sixty five (164) healthy adult male and female subjects will be enrolled and randomized to 1 of 2 treatments (82 subjects per treatment).
+
+Titer Definition
+
+Smallest distinct dilution in a titration series with a negative response
+Response is Sample ECL mean / Diluent Control ECL mean in this case study
+
+In the experiment, samples will undergo the following steps (in order):
+
+#### Tier 1 Screening
+
+If the screening result is *NEGATIVE*, then the result will be recoreded  *NEGATIVE*, otherwise screening *POSITIVE* and continue
+
+#### Tier 2 Confirmatory
+
+If the result is *NEGATIVE*, then the subject will have a confirmatory *NEGATIVE* result, otherwise a *POSITIVE* result with a "titer" value recorded and continue
+
+#### Tier 3 Titer
+
+If the result is *POSITIVE*, with a "titer" value recorded and continue and there will be no more test.
+
+_**Three‐tiered Testing Strategy**_
+
+This document will walk through the steps and procedues for assessing the immune response of a therapeutic protein when administered to patients by identifying positive samples through a three‐tiered testing strategy.
+
+Tiered approach for immunogenicity sample analysis will be outlined. First, the screen assay is used to determine whether samples are positive or negative for the presence of ADA, then followed by a confirmatory analysis utilizing the percent signal inhibition, then further characterization such as ADA titer is reported with positive samples and further drug-neutralizing potential is investigated.
+
+#### Interactive Three Tier immunogenicity Application
+
+Just static pages but you can call a external shiny app with an iframe like this:
+
+```{r}
+knitr::include_app("https://beta.rstudioconnect.com/philbowsher/050-kmeans-example/", 
+  height = "600px")
+  
+```
+
+

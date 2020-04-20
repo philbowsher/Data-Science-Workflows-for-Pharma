@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Immunogenicity - Tiered Approuch to Assess ADA Positive Samples</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+<script src="site_libs/htmlwidgets-0.9/htmlwidgets.js"></script>
+<script src="site_libs/datatables-binding-0.1/datatables.js"></script>
+<script src="site_libs/datatables-1.10.7/jquery.dataTables.min.js"></script>
+<link href="site_libs/datatables-default-1.10.7/dataTables.extra.css" rel="stylesheet" />
+<link href="site_libs/datatables-default-1.10.7/jquery.dataTables.min.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 64px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+
+.section h2 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h3 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h4 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h5 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h6 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Immunogenicity-RMarkdown-Website</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Notes
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="ImportantConcepts.html">Notes</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Tiers_Reporting
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Tiers.html">ADA Assessment</a>
+    </li>
+    <li>
+      <a href="Reporting.html">Reporting</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="links.html">Resources</a>
+</li>
+<li>
+  <a href="Tiers.html">Tiers</a>
+</li>
+<li>
+  <a href="Reporting.html">Reporting</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Immunogenicity - Tiered Approuch to Assess ADA Positive Samples</h1>
+
+</div>
+
+
+<p>ADA <em>three‐tiered</em> testing strategy is deployed here to assess ADA. Set screening and confirmatory cut-points in the rmd file at top.</p>
+<div id="ada-threetiered-testing-method" class="section level3">
+<h3>ADA Three‐tiered Testing Method</h3>
+</div>
+<div id="example-one" class="section level2">
+<h2>Example one</h2>
+<p>The Screening cut-point is: 200</p>
+<p>The Confirmatory cut-point is: 20</p>
+</div>
+<div id="screening-data" class="section level1">
+<h1>Screening Data</h1>
+<div id="htmlwidget-3fe9df52f1cfc2cea1d1" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3fe9df52f1cfc2cea1d1">{"x":{"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56"],[1,4,6,11,12,20,25,29,35,36,37,46,55,58,64,72,73,75,76,78,81,82,99,106,107,114,124,131,148,165,178,181,189,190,195,196,208,216,219,221,240,242,247,251,262,264,267,285,291,302,306,310,313,315,330,340],["ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,31,33,35,36,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,56,57,58,59,60,61,62,63,65],[377,288,468,467,485,570,837,819,402,212,374,450,277,418,482,276,323,241,518,880,984,714,611,1561,322,488,407,307,343,381,380,304,236,217,627,408,314,350,234,577,239,396,329,265,262,247,667,1023,334,1082,384,2190,217,446,359,440],[200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200],["Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive"],[2.57634135020579,2.45939248775923,2.67024585307412,2.66931688056611,2.68574173860226,2.75587485567249,2.92272545799326,2.91328390176042,2.60422605308447,2.32633586092875,2.57287160220048,2.65321251377534,2.44247976906445,2.62117628177504,2.68304703823885,2.44090908206522,2.5092025223311,2.38201704257487,2.71432975974523,2.94448267215017,2.99299509843134,2.85369821177617,2.78604121024255,3.19340290306242,2.50785587169583,2.68841982200271,2.60959440922522,2.48713837547719,2.53529412004277,2.58092497567562,2.57978359661681,2.48287358360875,2.37291200297011,2.33645973384853,2.79726754083072,2.61066016308988,2.49692964807321,2.54406804435028,2.36921585741014,2.76117581315573,2.37839790094814,2.59769518592551,2.51719589794997,2.42324587393681,2.41830129131975,2.39269695325967,2.82412583391655,3.00987563371216,2.52374646681156,3.03422726077055,2.58433122436753,3.34044411484012,2.33645973384853,2.64933485871214,2.55509444857832,2.64345267648619]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sample_Number<\/th>\n      <th>Site<\/th>\n      <th>Subject<\/th>\n      <th>Signal_Response_No_Drug<\/th>\n      <th>Screening_Cutpoint<\/th>\n      <th>Screening_Result_Drug<\/th>\n      <th>Signal_Response_No_Drug_log10<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[1,3,4,5,7]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false},"callback":null,"filter":"none","selection":"multiple"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="confirmatory-data" class="section level1">
+<h1>Confirmatory Data</h1>
+<div id="htmlwidget-e1833b604cf41662f777" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e1833b604cf41662f777">{"x":{"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49"],[1,4,6,11,12,20,25,29,35,37,55,58,64,72,73,75,76,78,81,82,99,106,107,124,165,178,181,189,190,195,196,208,216,219,221,242,247,251,262,264,267,285,302,306,310,313,315,330,340],["ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC"],[1,2,3,4,5,6,7,8,9,11,13,14,15,16,17,18,19,20,21,22,23,24,25,27,33,35,36,38,39,40,41,42,43,44,45,47,48,49,50,51,52,56,58,59,60,61,62,63,65],[377,288,468,467,485,570,837,819,402,374,277,418,482,276,323,241,518,880,984,714,611,1561,322,407,381,380,304,236,217,627,408,314,350,234,577,396,329,265,262,247,667,1023,1082,384,2190,217,446,359,440],[200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200],["Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive"],[2.57634135020579,2.45939248775923,2.67024585307412,2.66931688056611,2.68574173860226,2.75587485567249,2.92272545799326,2.91328390176042,2.60422605308447,2.57287160220048,2.44247976906445,2.62117628177504,2.68304703823885,2.44090908206522,2.5092025223311,2.38201704257487,2.71432975974523,2.94448267215017,2.99299509843134,2.85369821177617,2.78604121024255,3.19340290306242,2.50785587169583,2.60959440922522,2.58092497567562,2.57978359661681,2.48287358360875,2.37291200297011,2.33645973384853,2.79726754083072,2.61066016308988,2.49692964807321,2.54406804435028,2.36921585741014,2.76117581315573,2.59769518592551,2.51719589794997,2.42324587393681,2.41830129131975,2.39269695325967,2.82412583391655,3.00987563371216,3.03422726077055,2.58433122436753,3.34044411484012,2.33645973384853,2.64933485871214,2.55509444857832,2.64345267648619],[140,128,218,191,179,156,141,158,164,163,115,146,172,157,141,154,164,123,220,188,209,213,189,187,151,156,153,127,152,413,168,129,111,128,128,143,122,120,160,130,105,132,394,167,269,129,149,124,137],[62.8647214854111,55.5555555555556,53.4188034188034,59.1006423982869,63.0927835051546,72.6315789473684,83.1541218637993,80.7081807081807,59.2039800995025,56.4171122994652,58.4837545126354,65.0717703349282,64.3153526970954,43.1159420289855,56.3467492260062,36.0995850622407,68.3397683397683,86.0227272727273,77.6422764227642,73.6694677871149,65.7937806873977,86.3549007046765,41.304347826087,54.0540540540541,60.3674540682415,58.9473684210526,49.671052631579,46.1864406779661,29.9539170506912,34.1307814992025,58.8235294117647,58.9171974522293,68.2857142857143,45.2991452991453,77.8162911611785,63.8888888888889,62.9179331306991,54.7169811320755,38.9312977099237,47.3684210526316,84.2578710644678,87.0967741935484,63.5859519408503,56.5104166666667,87.7168949771689,40.5529953917051,66.5919282511211,65.4596100278551,68.8636363636364],[20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20],["Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sample_Number<\/th>\n      <th>Site<\/th>\n      <th>Subject<\/th>\n      <th>Signal_Response_No_Drug<\/th>\n      <th>Screening_Cutpoint<\/th>\n      <th>Screening_Result_Drug<\/th>\n      <th>Signal_Response_No_Drug_log10<\/th>\n      <th>Signal_Response_Drug<\/th>\n      <th>Percent_Signal_Inhibition_Drug<\/th>\n      <th>Confirmatory_Cutpoint<\/th>\n      <th>Confirmatory_Result_Drug<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[1,3,4,5,7,8,9,10]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false},"callback":null,"filter":"none","selection":"multiple"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="add-titer-to-confirmatory-data" class="section level1">
+<h1>Add Titer to Confirmatory Data</h1>
+<div id="htmlwidget-a17b57553dd80f25c665" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a17b57553dd80f25c665">{"x":{"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49"],[1,4,6,11,12,20,25,29,35,37,55,58,64,72,73,75,76,78,81,82,99,106,107,124,165,178,181,189,190,195,196,208,216,219,221,242,247,251,262,264,267,285,302,306,310,313,315,330,340],["ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC"],[1,2,3,4,5,6,7,8,9,11,13,14,15,16,17,18,19,20,21,22,23,24,25,27,33,35,36,38,39,40,41,42,43,44,45,47,48,49,50,51,52,56,58,59,60,61,62,63,65],[377,288,468,467,485,570,837,819,402,374,277,418,482,276,323,241,518,880,984,714,611,1561,322,407,381,380,304,236,217,627,408,314,350,234,577,396,329,265,262,247,667,1023,1082,384,2190,217,446,359,440],[200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200],["Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive"],[2.57634135020579,2.45939248775923,2.67024585307412,2.66931688056611,2.68574173860226,2.75587485567249,2.92272545799326,2.91328390176042,2.60422605308447,2.57287160220048,2.44247976906445,2.62117628177504,2.68304703823885,2.44090908206522,2.5092025223311,2.38201704257487,2.71432975974523,2.94448267215017,2.99299509843134,2.85369821177617,2.78604121024255,3.19340290306242,2.50785587169583,2.60959440922522,2.58092497567562,2.57978359661681,2.48287358360875,2.37291200297011,2.33645973384853,2.79726754083072,2.61066016308988,2.49692964807321,2.54406804435028,2.36921585741014,2.76117581315573,2.59769518592551,2.51719589794997,2.42324587393681,2.41830129131975,2.39269695325967,2.82412583391655,3.00987563371216,3.03422726077055,2.58433122436753,3.34044411484012,2.33645973384853,2.64933485871214,2.55509444857832,2.64345267648619],[140,128,218,191,179,156,141,158,164,163,115,146,172,157,141,154,164,123,220,188,209,213,189,187,151,156,153,127,152,413,168,129,111,128,128,143,122,120,160,130,105,132,394,167,269,129,149,124,137],[62.8647214854111,55.5555555555556,53.4188034188034,59.1006423982869,63.0927835051546,72.6315789473684,83.1541218637993,80.7081807081807,59.2039800995025,56.4171122994652,58.4837545126354,65.0717703349282,64.3153526970954,43.1159420289855,56.3467492260062,36.0995850622407,68.3397683397683,86.0227272727273,77.6422764227642,73.6694677871149,65.7937806873977,86.3549007046765,41.304347826087,54.0540540540541,60.3674540682415,58.9473684210526,49.671052631579,46.1864406779661,29.9539170506912,34.1307814992025,58.8235294117647,58.9171974522293,68.2857142857143,45.2991452991453,77.8162911611785,63.8888888888889,62.9179331306991,54.7169811320755,38.9312977099237,47.3684210526316,84.2578710644678,87.0967741935484,63.5859519408503,56.5104166666667,87.7168949771689,40.5529953917051,66.5919282511211,65.4596100278551,68.8636363636364],[20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20],["Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive","Positive"],["ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC","ABC"],[1,2,3,4,5,6,7,8,9,11,13,14,15,16,17,18,19,20,21,22,23,24,25,27,33,35,36,38,39,40,41,42,43,44,45,47,48,49,50,51,52,56,58,59,60,61,62,63,65],[16,17,18,19,20,21,22,23,24,24,24,24,24,24,24,24,24,24,24,24,25,25,26,26,27,29,30,32,33,34,35,36,37,38,39,41,42,43,44,45,46,50,52,53,54,55,56,57,59],[200,25,1600,100,200,400,200,200,6400,12800,3200,6400,1600,400,800,100,800,1600,6400,12800,400,1600,100,800,200,100,400,200,400,3200,6400,400,100,100,400,200,3200,100,100,400,1600,400,200,100,3200,100,3200,800,100]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sample_Number<\/th>\n      <th>Site.x<\/th>\n      <th>Subject.x<\/th>\n      <th>Signal_Response_No_Drug<\/th>\n      <th>Screening_Cutpoint<\/th>\n      <th>Screening_Result_Drug<\/th>\n      <th>Signal_Response_No_Drug_log10<\/th>\n      <th>Signal_Response_Drug<\/th>\n      <th>Percent_Signal_Inhibition_Drug<\/th>\n      <th>Confirmatory_Cutpoint<\/th>\n      <th>Confirmatory_Result_Drug<\/th>\n      <th>Site.y<\/th>\n      <th>Subject.y<\/th>\n      <th>Titer_Run_Number<\/th>\n      <th>Reported_Titer<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[1,3,4,5,7,8,9,10,13,14,15]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false},"callback":null,"filter":"none","selection":"multiple"},"evals":[],"jsHooks":[]}</script>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

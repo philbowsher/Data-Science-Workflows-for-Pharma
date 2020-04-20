@@ -1,0 +1,66 @@
+---
+title: "`r params$dynamictitle`"
+date: "`r params$reportdate`"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    social: menu
+    source_code: embed
+params:
+  symbol1: LLY
+  symbol2: ANTM
+  symbol3: CMI
+  reportdate: !r Sys.Date()
+  dynamictitle: "Dygraphs Linked Time Series"
+---
+
+```{r setup, include=FALSE}
+library(dygraphs)
+library(quantmod)
+library(flexdashboard)
+
+# stock < - getSymbols(c(params$symbol1, params$symbol2, params$symbol3), from = "2014-01-01", auto.assign=TRUE)
+
+stock1 <- getSymbols(params$symbol1, auto.assign = FALSE,
+                    from = "2014-01-01", end = Sys.Date())
+
+colnames(stock1) <- c("Open", "High", "Low", "Close", "Volume", "Adjusted")
+
+name1 <- params$symbol1
+
+stock2 <- getSymbols(params$symbol2, auto.assign = FALSE,
+                    from = "2014-01-01", end = Sys.Date())
+
+colnames(stock2) <- c("Open", "High", "Low", "Close", "Volume", "Adjusted")
+
+name2 <- params$symbol2
+
+stock3 <- getSymbols(params$symbol3, auto.assign = FALSE,
+                    from = "2014-01-01", end = Sys.Date())
+
+colnames(stock3) <- c("Open", "High", "Low", "Close", "Volume", "Adjusted")
+
+name3 <- params$symbol3
+```
+
+### `r params$symbol1`
+
+```{r}
+dygraph(stock1[,2:4], group = "stocks") %>% 
+  dySeries(c("Low", "Close", "High"), label = name1)
+```
+
+### `r params$symbol2`
+
+```{r}
+dygraph(stock2[,2:4], group = "stocks") %>% 
+  dySeries(c("Low", "Close", "High"), label = name2)
+```
+
+### `r params$symbol3`
+
+```{r}
+dygraph(stock3[,2:4], group = "stocks") %>% 
+  dySeries(c("Low", "Close", "High"), label = name3)
+```
+

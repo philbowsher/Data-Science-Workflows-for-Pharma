@@ -1,0 +1,110 @@
+---
+title: "Stocks Dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: scroll
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(dplyr)
+library(highcharter)
+library(magrittr)
+library(quantmod)
+
+library(flexdashboard)
+
+AAPL <- getSymbols("AAPL", from = "2015-01-01", auto.assign = FALSE)
+AAPL <- adjustOHLC(AAPL)
+AAPL_MA_10 <- SMA(Cl(AAPL), n=10)
+AAPL_RSI_14 <- RSI(Cl(AAPL), n=14)
+AAPL_RSI_Sell <- xts(rep(70, NROW(AAPL)), index(AAPL))
+AAPL_RSI_Buy <- xts(rep(30, NROW(AAPL)), index(AAPL))
+
+GOOG <- getSymbols("GOOG", from = "2015-01-01", auto.assign = FALSE)
+GOOG <- adjustOHLC(GOOG)
+GOOG_MA_10 <- SMA(Cl(GOOG), n=10)
+GOOG_RSI_14 <- RSI(Cl(GOOG), n=14)
+GOOG_RSI_Sell <- xts(rep(70, NROW(GOOG)), index(GOOG))
+GOOG_RSI_Buy <- xts(rep(30, NROW(GOOG)), index(GOOG))
+```
+
+Row {data-height=650 .tabset .tabset-fade}
+-------------------------------------
+
+### Apple
+
+```{r}
+highchart() %>% 
+  hc_yAxis_multiples(
+    list(title = list(text = NULL), height = "45%", top = "0%"),
+    list(title = list(text = NULL), height = "25%", top = "47.5%", opposite = TRUE),
+    list(title = list(text = NULL), height = "25%", top = "75%")
+  ) %>% 
+  hc_add_series_ohlc(AAPL, yAxis = 0, name = "AAPL") %>% 
+  hc_add_series_xts(AAPL_MA_10, yAxis = 0, name = "10-day MA") %>% 
+  hc_add_series_xts(AAPL$AAPL.Volume, color = "#bfbfbf", yAxis = 1, name = "Volume", type = "column") %>% 
+  hc_add_series_xts(AAPL_RSI_14, yAxis = 2, name = "Osciallator") %>% 
+  hc_add_series_xts(AAPL_RSI_Sell, color = "#ED674D", yAxis = 2, name = "Sell level", enableMouseTracking = FALSE) %>% 
+  hc_add_series_xts(AAPL_RSI_Buy, color = "#4dd3ed", yAxis = 2, name = "Buy level", enableMouseTracking = FALSE)
+```
+
+### Google
+
+```{r}
+highchart() %>% 
+  hc_yAxis_multiples(
+    list(title = list(text = NULL), height = "45%", top = "0%"),
+    list(title = list(text = NULL), height = "25%", top = "47.5%", opposite = TRUE),
+    list(title = list(text = NULL), height = "25%", top = "75%")
+  ) %>% 
+  hc_add_series_ohlc(GOOG, yAxis = 0, name = "GOOG") %>% 
+  hc_add_series_xts(GOOG_MA_10, yAxis = 0, name = "10-day MA") %>% 
+  hc_add_series_xts(GOOG$GOOG.Volume, color = "#bfbfbf", yAxis = 1, name = "Volume", type = "column") %>% 
+  hc_add_series_xts(GOOG_RSI_14, yAxis = 2, name = "Osciallator") %>% 
+  hc_add_series_xts(GOOG_RSI_Sell, color = "#ED674D", yAxis = 2, name = "Sell level", enableMouseTracking = FALSE) %>% 
+  hc_add_series_xts(GOOG_RSI_Buy, color = "#4dd3ed", yAxis = 2, name = "Buy level", enableMouseTracking = FALSE)
+```
+
+Row {data-height=350}
+-------------------------------------
+
+### Nasdaq
+
+```{r}
+nasdaq <- getSymbols("^IXIC", from = "2015-01-01", auto.assign = FALSE)
+
+nasdaq <- nasdaq[,ncol(nasdaq)]
+
+highchart(type = "stock") %>% 
+  hc_add_series_xts(nasdaq, id = "NASDAQ Index")
+```   
+
+### Portfolio
+
+```{r}
+portfolio <- data_frame(name = c("Apple", "Google", "Microsoft", "Tesla"),
+                        y = c(200000, 300000, 150000, 250000))
+
+  portfolio %<>%
+    arrange(dplyr::desc(y))
+  
+  portfolio <- jsonlite::fromJSON(jsonlite::toJSON(portfolio), 
+                                  simplifyVector = FALSE)
+  
+highchart() %>%
+  hc_chart(type = "pie") %>%
+  hc_plotOptions(
+    pie = list(
+      allowPointSelect = TRUE
+    )
+  ) %>%
+  hc_tooltip(
+    pointFormat = '{series.name}: <b>${point.y:,.0f}</b>'
+  ) %>%
+  hc_add_series(data = portfolio,
+               name = "Investment") %>%
+  hc_add_theme(hc_theme_smpl())
+```

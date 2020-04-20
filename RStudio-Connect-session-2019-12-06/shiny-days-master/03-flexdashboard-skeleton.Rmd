@@ -1,0 +1,77 @@
+---
+title: "Adverse Events"
+output:
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    theme: readable
+    vertical_layout: fill
+---
+
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(stringr)
+library(openfda)
+library(dplyr)
+library(ggplot2)
+library(ggthemes)
+
+get_adverse <- function(gender, brand_name, age) {
+  fda_query("/drug/event.json") %>%
+    fda_filter("patient.drug.openfda.brand_name", brand_name) %>% 
+    fda_filter("patient.patientsex", gender) %>% 
+    fda_filter("patient.patientonsetage", age) %>% 
+    fda_count("patient.reaction.reactionmeddrapt.exact") %>% 
+    fda_limit(10) %>% 
+    fda_exec()
+}
+
+create_age <- function(min, max){#
+  sprintf('[%d+TO+%d]', min, max)
+}
+```
+
+```{r}
+
+age <- create_age(20,65)
+
+jnk <- capture.output(male <- get_adverse("1", "Keytruda", age))
+if (!is.null(male)) {
+  male$gender <- 'male'
+}
+
+jnk <- capture.output(female <- get_adverse("1", "Keytruda", age))
+if (!is.null(female)) {
+  female$gender <- 'female'
+}
+
+adverse <- rbind(male, female)
+
+```
+
+
+Column 
+-----------------------------------------------------------------------
+
+### All Events
+
+
+```{r}
+
+```
+
+Column 
+-----------------------------------------------------------------------
+
+### Age Range
+
+```{r}
+
+```
+
+
+### Events by Gender 
+
+```{r}
+
+```

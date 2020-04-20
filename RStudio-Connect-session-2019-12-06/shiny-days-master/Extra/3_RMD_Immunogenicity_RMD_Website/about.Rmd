@@ -1,0 +1,47 @@
+---
+title: About
+output: 
+  html_document
+---
+* Client name: XYZ biologics, LLC (Formerly known as ABC Proteins, LLC)
+  * XYZ Study No. CA123456
+  
+Therapeutic proteins have the potential to elicit an immune response
+when administered to patients. An important aspect of developing
+these medicines is to understand the immunogenicity and to be able
+to communicate this information to patients, prescribers, and
+regulators.
+
+Anti-drug antibodies (ADA) have been implicated in infusion reactions and anaphylaxis as well as immune complex-mediated disease. ADA have also caused secondary treatment failures (loss of efficacy) and, in rare occasions, more serious thrombocytopenia and pure red cell aplasia. Therefore, ADA are a medical concern in terms of safety and long-term efficacy of the drug and it is critical to evaluate their development in all patients during clinical studies, not just in a symptom-driven manner. With a goal of guiding medical practice, the elucidation of ADA responses and their characteristics relative to clinical consequences is vital [@shankar2014assessment].
+
+ADA comprises neutralizing and non-neutralizing ADA. Other terms that have been used for ADA include anti-therapeutic antibody (ATA), anti-product antibody (APA), or anti-biologic antibody (ABA).
+
++ Neutralizing ADA (NAb): ADA that inhibits or reduces the pharmacological activity of the biologic drug molecule, as determined by an *in vitro* test or animal-based bioassay method, regardless of its *in vitro* clinical relavence (i.e., whether or not test method results relate to clinical impact in the subject).
+
++ Non-neutralizing ADA (non-neutralizing antibody, non-
+NAb): ADA that binds to the biologic drug molecule but
+does not inhibit its pharmacological activity in an in vitro
+test or animal-based bioassay method, regardless of its in
+vivo clinical relevance (i.e., whether or not test method
+results relate to clinical impact in the subject).
+
+ADA three‐tiered testing strategy is deployed here to assess ADA.
+
+## Statistical Analysis
+
+ADA Three‐tiered Testing Strategy
+
+ADA	Positive	Sample: when	ADA	is	detected	in	a	sample,	the	sample	is	considered positive.
+
+Anti-drug antibody (ADA): Biologic drug-reactive antibody, including pre-existing host antibodies that are cross-reactive with the administered biologic drug (baseline ADA). 
+
+## The following tools were used to develop this site:
+
+* [`R`](https://www.r-project.org/): `R` is a software language and programming environment for statistical computing and for the graphical analysis of data.
+* [`Rmarkdown`](http://rmarkdown.rstudio.com/index.html): `Rmarkdown` is a package for `R` that combines simple `markdown` authoring tools for formatting text with chunks of `R` code; when compiled using [`knitr`](http://yihui.name/knitr/) the resulting output is a formatted document that contains the results of executing the embedded `R` code. Although `Rmarkdown` can produce files in a variety of formats, the two of particular interest in this project are `html` and `pdf` formats. 
+* [`RStudio`](https://www.rstudio.com/home/): `RStudio` is an integrated development environment that, among other features, provides a console for running `R`, a window for editing files, a window for managing files, a window for viewing plots, a window for viewing help files, and an internal browser window of viewing dynamic content. `RStudio` also provides tools for automating many tasks. Although `RStudio` is a convenient way to manage this project, it is not a requirement as it simply provides a way to work with `R` and `Rmarkdown`.
+* `R Packages`: One of the strengths of `R` is the availability of packages of `R` functions that are designed to work with data. The materials in this project, for example, use the [`flexdashboard`](http://rmarkdown.rstudio.com/flexdashboard/index.html) package to create some dashboards, [`quantmod`](https://cran.r-project.org/web/packages/quantmod/index.html) and the [`dygraphs`](https://rstudio.github.io/dygraphs/) packages to create interactive stock reports.
+
+See the link below for more info:
+
+http://rmarkdown.rstudio.com/rmarkdown_websites.html

@@ -1,0 +1,34 @@
+name: "Immunogenicity-RMarkdown-Website"
+navbar:
+  title: "Immunogenicity-RMarkdown-Website"
+  type: inverse
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+    - text: "Notes"
+      menu:
+        - text: "Notes"
+          href: ImportantConcepts.html
+    - text:  "Tiers_Reporting"
+      menu:
+        - text: "ADA Assessment"
+          href: Tiers.html
+        - text: "Reporting"
+          href: Reporting.html
+    - text: "Resources"
+      href: links.html
+    - text: "Tiers"
+      href: Tiers.html
+    - text: "Reporting"
+      href: Reporting.html
+output:
+  html_document:
+    theme: paper
+    highlight: default
+    toc: false
+    toc_float: false
+    css: styles.css
+
+      

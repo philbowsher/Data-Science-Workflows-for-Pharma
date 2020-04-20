@@ -1,0 +1,38 @@
+---
+title: "Simple Reticulate Example"
+output:
+  pdf_document: default
+  html_notebook: default
+---
+
+
+```{r setup}
+library(reticulate)
+library(ggplot2)
+```
+
+
+```{python}
+import pandas
+file_name = "http://samplecsvs.s3.amazonaws.com/SalesJan2009.csv"
+df = pandas.read_csv(file_name)
+print(df.head())
+```
+
+```{r}
+ggplot(py$df) + geom_bar(aes(Payment_Type))
+```
+
+```{r}
+library(dplyr)
+grouped <- tibble(card = py$df$Payment_Type) %>% 
+  group_by(card) %>% 
+  summarize(total = n())
+```
+
+
+```{python}
+print(r.grouped)
+```
+
+

@@ -1,0 +1,54 @@
+---
+title: "airplanes"
+params:
+  carrier: AA
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE)
+```
+
+
+```{r}
+my_carrier <- params$carrier
+print(my_carrier)
+
+library(odbc)
+library(DBI)
+con <- dbConnect(odbc::odbc(), "SQL Server (DSN)")
+
+# pull data using DBI
+airlines <- dbReadTable(con, "airlines")
+
+# get the name of the airline
+my_airline <- airlines[airlines$carrier == my_carrier, "name"]
+```
+
+```{r}
+library(dplyr)
+library(dbplyr)
+
+flights <- tbl(con, "flights")
+
+
+# use dbplyr to create SQL query
+my_carrier_flights <- flights %>% 
+  filter(carrier == my_carrier) %>%
+  select(carrier, year, month, day, dep_time, arr_time)
+```
+
+# `r my_airline`
+
+This is a report about `r my_airline` and all of the wonderful arrival times that they have.
+
+
+# A Plot!
+
+```{r}
+library(ggplot2)
+
+ggplot(my_carrier_flights %>% collect(), aes(arr_time)) + geom_histogram()
+```

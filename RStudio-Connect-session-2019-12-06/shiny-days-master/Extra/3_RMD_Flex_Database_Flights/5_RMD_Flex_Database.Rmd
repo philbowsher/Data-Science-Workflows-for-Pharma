@@ -1,0 +1,162 @@
+---
+title: "Indianapolis Airport"
+output: 
+  flexdashboard::flex_dashboard
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(dplyr)
+library(dbplyr)
+library(DBI)
+library(leaflet)
+library(odbc)
+library(metricsgraphics)
+library(RColorBrewer)
+library(ggplot2)
+
+con <- dbConnect(odbc::odbc(), "SQL Server (DSN)")
+#Just pointers to tables and not downloading data
+flights <- tbl(con, "indyflights")
+airports <- tbl(con, "airports")
+airlines <- tbl(con, "airlines")
+```
+
+
+Column {data-width=200}
+-----------------------------------------------------------------------
+
+### Observations
+```{r}
+valueBox(
+  prettyNum(pull(tally(flights)), big.mark = ","), 
+  "Total Number of Flights", 
+  icon = "fa-plane",
+  color = "lightblue"
+  )
+```
+
+### Total Airports
+```{r}
+flights %>%
+  group_by(dest) %>%
+  summarise() %>%
+  tally() %>%
+  pull() %>%
+  valueBox(., "Total Destination Airports", icon = "fa-globe")
+```
+
+### Delayed Ratio
+```{r}
+flights %>%
+  summarise(
+    delayed = sum(ifelse(depdelay > 15, 1 , 0), na.rm = TRUE) / n()
+  ) %>%
+  mutate(delayed = round(delayed * 100, 0)) %>%
+  pull() %>%
+  gauge(value = ., min = 0, max = 100, label = "Delayed Ratio")
+```
+
+
+### No. of Flights per Hour
+
+```{r}
+flights %>%
+  mutate(hours = round(crsdeptime /100), 0) %>%
+  select(hours) %>%
+  group_by(hours) %>%
+  tally() %>%
+  arrange(hours) %>% 
+  collect() %>%
+  ggplot() +
+  geom_area(aes(x = hours, y = n), fill = "blue", alpha = 0.4) +
+  geom_point(aes(x = hours, y = n), color = "blue", size = 3) +
+  theme_minimal() +
+  labs(title = "", x = "Hour", y = "No. of Flights")
+```
+
+
+Column {data-width=500}
+-----------------------------------------------------------------------
+
+### Fligths by Origin Airports
+
+```{r}
+flights %>%
+  filter(dest == "IND") %>%
+  inner_join(airports, by = c("origin" = "faa")) %>%
+  group_by(name, lon, lat) %>%
+  tally() %>%
+  collect() %>%
+  ungroup() %>%
+  mutate(
+    circle = (n / max(n)) * 30
+    ) %>%
+  leaflet() %>%
+  addTiles() %>%
+  addCircleMarkers(
+    lng = ~ lon,
+    lat = ~ lat,
+    radius = ~ circle  ,
+    fillOpacity  = 0.5,
+    stroke = FALSE,
+    color = "red",
+    label = ~paste0(name, " - ", prettyNum(n, big.mark = ",")),
+    labelOptions = labelOptions(textsize = "12px")
+    )
+
+```
+
+### Fligths by Destination Airports
+
+```{r}
+flights %>%
+  filter(origin == "IND") %>%
+  inner_join(airports, by = c("dest" = "faa")) %>%
+  group_by(name, lon, lat) %>%
+  tally() %>%
+  collect() %>%
+  ungroup() %>%
+  mutate(circle = (n / max(n)) * 30) %>%
+  leaflet() %>%
+  addTiles() %>%
+  addCircleMarkers(
+    lng = ~ lon,
+    lat = ~ lat,
+    radius = ~ circle  ,
+    fillOpacity  = 0.5,
+    stroke = FALSE,
+    color = "blue",
+    label = ~paste0(name, " - ", prettyNum(n, big.mark = ",")),
+    labelOptions = labelOptions(textsize = "12px")
+    )
+```
+
+Column {data-width=300}
+-----------------------------------------------------------------------
+
+### Fligths by Origin Airports
+
+```{r, fig.height=10}
+flights %>%
+  group_by(uniquecarrier) %>%
+  tally() %>%
+  inner_join(airlines, by = c("uniquecarrier" = "carrier")) %>%
+  collect() %>%
+  ggplot() +
+  geom_col(aes(name, n), alpha = 0.2, fill = "blue") +
+  geom_text(aes(name, 100, label = paste0(name, ": ", prettyNum(n, ","))), hjust = 0) +
+  coord_flip() +
+  theme_minimal() +
+  theme(
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    axis.text = element_blank(),
+    panel.grid = element_blank()) +
+  labs(y = "No. of Flights") 
+```
+
+
+```{r, include = FALSE}
+dbDisconnect(con)
+```

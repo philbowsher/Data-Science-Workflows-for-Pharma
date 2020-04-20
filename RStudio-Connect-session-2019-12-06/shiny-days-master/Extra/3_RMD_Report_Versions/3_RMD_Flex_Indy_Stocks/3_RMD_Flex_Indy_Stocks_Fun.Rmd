@@ -1,0 +1,59 @@
+---
+title: "`r params$dynamictitle`"
+date: "`r params$reportdate`"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    social: menu
+    source_code: embed
+params:
+  symbol: [LLY, ANTM, CMI]
+  reportdate: !r Sys.Date()
+  dynamictitle: "Dygraphs Linked Time Series"
+---
+
+```{r setup, include=FALSE}
+library(dygraphs)
+library(quantmod)
+library(flexdashboard)
+
+# stock < - getSymbols(c(params$symbol1, params$symbol2, params$symbol3), from = "2014-01-01", auto.assign=TRUE)
+
+symbol <- as.list(params$symbol)
+stock <- lapply(
+  symbol, function(x){
+  prep <- getSymbols(x, auto.assign = FALSE,
+                    from = "2014-01-01", end = Sys.Date())
+})
+
+
+
+dygraph <- mapply(function(x, label){
+  
+  colnames(x) <- c("Open", "High", "Low", "Close", "Volume", "Adjusted")
+  dygraph(x[,2:4], group="stocks") %>%
+    dySeries(c("Low", "Close", "High"), label=label)
+}
+, x=stock
+, label=symbol
+, SIMPLIFY = FALSE)
+```
+
+### `r symbol[1]`
+
+```{r}
+dygraph[[1]]
+```
+
+### `r symbol[2]`
+
+```{r}
+dygraph[[2]]
+```
+
+### `r symbol[3]`
+
+```{r}
+dygraph[[3]]
+```
+
