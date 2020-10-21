@@ -2,7 +2,7 @@
 
 Live Presentation is here:
 
-https://colorado.rstudio.com/rsc/content/5774/RSC2019Workshop.html#1
+https://colorado.rstudio.com/rsc/content/7511/RSC2019Workshop.html#1
 
 Go here after:
 
