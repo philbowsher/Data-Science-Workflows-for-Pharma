@@ -49,6 +49,8 @@ if (!is.null(female)) {
 
 adverse <- rbind(male, female)
 
+# adverse <- pin_get("Adverse", board = "rsconnect") %>% group_by(term) %>% summarise(count = sum(count))
+
 ```
 
 Column 

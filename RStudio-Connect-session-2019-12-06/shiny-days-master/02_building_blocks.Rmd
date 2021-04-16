@@ -62,6 +62,20 @@ adverse <- rbind(male, female)
 adverse
 ```
 
+## Publish Pin
+```{r}
+library(pins)
+
+# pins::board_register_rsconnect()
+
+board_register("rsconnect",
+               server = "CONNECT_SERVER",
+               key = "CONNECT_SERVER_KEY")
+
+pin(adverse, name = "Adverse" , description = "Adverse Daily", board = "rsconnect")
+```
+
+
 ## Plotting
 
 Now we're ready to start investigating the data and showing off the resulting graphics. We'll create plots and then a static dashboard.
