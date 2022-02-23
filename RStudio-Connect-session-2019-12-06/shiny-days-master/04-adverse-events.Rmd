@@ -42,7 +42,7 @@ if (!is.null(male)) {
   male$gender <- 'male'
 }
 
-jnk <- capture.output(female <- get_adverse("1", params$drug, age))
+jnk <- capture.output(female <- get_adverse("2", params$drug, age))
 if (!is.null(female)) {
   female$gender <- 'female'
 }

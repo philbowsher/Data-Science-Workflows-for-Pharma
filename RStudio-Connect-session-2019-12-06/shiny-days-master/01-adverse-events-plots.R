@@ -29,7 +29,7 @@ jnk <- capture.output(male <- get_adverse("1", drug, age))
 if (!is.null(male)) {
   male$gender <- 'male'
 }
-jnk <- capture.output(female <- get_adverse("1", drug, age))
+jnk <- capture.output(female <- get_adverse("2", drug, age))
 if (!is.null(female)) {
   female$gender <- 'female'
 }
