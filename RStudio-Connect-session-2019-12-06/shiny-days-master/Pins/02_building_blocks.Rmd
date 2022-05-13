@@ -94,7 +94,7 @@ library(pins)
 # pins::board_register_rsconnect()
 
 board <- board_rsconnect(auth = "envvar", account = "gt", server = "http://ec2-18-216-69-78.us-east-2.compute.amazonaws.com/rsconnect/",
-               key = "CkOOl2oN1nNpifYPqowht7QMuTIWeKLc")
+               key = Sys.getenv("VETIVER_API"))
 
 board %>% pin_write(adverse, "adverse", type = "csv")
 ```
