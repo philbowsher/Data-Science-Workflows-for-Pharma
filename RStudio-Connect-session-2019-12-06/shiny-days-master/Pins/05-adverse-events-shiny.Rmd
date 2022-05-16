@@ -47,10 +47,13 @@ Column {.sidebar}
 #This to be replaced by pins pull
 
 library(pins)
-board <- board_rsconnect("envvar", server = "http://ec2-18-216-69-78.us-east-2.compute.amazonaws.com/rsconnect", key = Sys.getenv("VETIVER_API"))
-adverse <-pin_read(board, "gt/adverse")
+board <- board_register_rsconnect()
+adverseBase <-pin_read(board, "cole/adverse")
 
-textInput('sel_name', 'Brand Name Drug', value = "Tylenol")
+drugs <- unique(adverseBase$drug)
+
+
+shiny::selectInput("sel_name", "Brand Name Drug", choices = drugs, selected = drugs[0])
 
 sliderInput('ages', 'Age Range', min = 10, max = 80, value = c(20,60))
 
@@ -73,7 +76,9 @@ age <- reactive({create_age(input$ages[1],input$ages[2])})
 #  ad
 # })
 
-adverse <- reactive({pin_read(board, "gt/adverse")
+adverse <- reactive({
+  adverseBase %>%
+    filter(drug == input$sel_name)
 })
 
 ```
