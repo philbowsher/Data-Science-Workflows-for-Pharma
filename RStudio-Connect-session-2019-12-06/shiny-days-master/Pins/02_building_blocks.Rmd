@@ -91,10 +91,8 @@ adverse
 ```{r}
 library(pins)
 
-# pins::board_register_rsconnect()
-
-board <- board_rsconnect(auth = "envvar", account = "gt", server = "http://ec2-18-216-69-78.us-east-2.compute.amazonaws.com/rsconnect/",
-               key = Sys.getenv("VETIVER_API"))
+# depends on CONNECT_SERVER and CONNECT_API_KEY variable
+board <- board_register_rsconnect()
 
 board %>% pin_write(adverse, "adverse", type = "csv")
 ```
@@ -123,14 +121,14 @@ Now we're ready to start investigating the data and showing off the resulting gr
 
 ```{r plots}
 # plot all events  
-adverse %>% filter(drug == drug) %>%
-  group_by(term) %>% 
+adverse %>%
+  group_by(drug, term) %>% 
   summarise(count = sum(count)) %>% 
   ggplot() +
+  facet_wrap(~drug) +
   geom_bar(aes(reorder(term,count), count), stat = 'identity') +
   coord_flip() +
   labs(
-    title = drug,
     x = NULL,
     y = NULL
   ) +
@@ -140,7 +138,9 @@ adverse %>% filter(drug == drug) %>%
 
 ```{r gender}
   # plot by gender
-ggplot(adverse) +
+adverse %>%
+  filter(drug == drug) %>%
+ggplot() +
   geom_bar(aes(reorder(term,count), count, fill = gender), stat = 'identity') +
   facet_wrap(~gender)+
   coord_flip() +
