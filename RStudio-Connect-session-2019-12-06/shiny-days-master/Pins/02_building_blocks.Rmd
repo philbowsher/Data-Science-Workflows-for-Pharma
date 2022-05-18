@@ -23,9 +23,8 @@ get_adverse <- function(gender, brand_name, age) {
 
   map_df(c("Aspirin", "Fexofenadine", "Clonazepam"), function(drug) {
     df = my_query %>%
+    fda_filter("patient.patientsex", gender) %>% 
     fda_filter("patient.drug.openfda.generic_name", drug) %>% 
-    fda_filter("patient.patientonsetageunit", "801") %>% 
-    fda_count("patient.patientonsetage") %>% 
     fda_count("patient.reaction.reactionmeddrapt.exact") %>% 
     fda_limit(10) %>% 
     fda_exec()
@@ -40,26 +39,6 @@ create_age <- function(min, max){#
 ```
 
 
-
-
-```{r openfda}
-# Helper Functions
-# get_adverse <- function(gender, brand_name, age) {
-#  fda_query("/drug/event.json") %>%
-#    fda_filter("patient.drug.openfda.brand_name", brand_name) %>% 
-#    fda_filter("patient.patientsex", gender) %>% 
-#    fda_filter("patient.patientonsetage", age) %>% 
-#    fda_count("patient.reaction.reactionmeddrapt.exact") %>% 
-#    fda_limit(10) %>% 
-#    fda_exec()
-#}
-
-
-#create_age <- function(min, max){#
-#  sprintf('[%d+TO+%d]', min, max)
-#}
-
-```
 
 Using our openFDA helper functions, we can pull adverse event data by gender for a specific drug and age range. We can also lookup the drug's active ingredients.
 
@@ -91,31 +70,12 @@ adverse
 ```{r}
 library(pins)
 
-# pins::board_register_rsconnect()
-
-board <- board_rsconnect(auth = "envvar", account = "gt", server = "http://ec2-18-216-69-78.us-east-2.compute.amazonaws.com/rsconnect/",
-               key = Sys.getenv("VETIVER_API"))
+# depends on CONNECT_SERVER and CONNECT_API_KEY variable
+board <- board_register_rsconnect()
 
 board %>% pin_write(adverse, "adverse", type = "csv")
 ```
 
-
-## Publish Pin Securly
-```{r}
-# library(pins)
-
-# pins::board_register_rsconnect()
-
-
-# board <- board_rsconnect(
-#    auth = "envvar",
-#    server = Sys.getenv("CONNECT_SERVER"), # Sys.getenv("CONNECT_SERVER")
-#    account = "gt",
-#    key = Sys.getenv("VETIVER_API"))
-
-# board %>% pin_write(adverse, "adverse", type = "csv")
-
-```
 
 ## Plotting
 
@@ -123,14 +83,14 @@ Now we're ready to start investigating the data and showing off the resulting gr
 
 ```{r plots}
 # plot all events  
-adverse %>% filter(drug == drug) %>%
-  group_by(term) %>% 
+adverse %>%
+  group_by(drug, term) %>% 
   summarise(count = sum(count)) %>% 
   ggplot() +
+  facet_wrap(~drug) +
   geom_bar(aes(reorder(term,count), count), stat = 'identity') +
   coord_flip() +
   labs(
-    title = drug,
     x = NULL,
     y = NULL
   ) +
@@ -139,8 +99,10 @@ adverse %>% filter(drug == drug) %>%
 ```
 
 ```{r gender}
-  # plot by gender
-ggplot(adverse) +
+  # plot by gender for one drug
+adverse %>%
+  filter(drug == drug) %>%
+ggplot() +
   geom_bar(aes(reorder(term,count), count, fill = gender), stat = 'identity') +
   facet_wrap(~gender)+
   coord_flip() +
