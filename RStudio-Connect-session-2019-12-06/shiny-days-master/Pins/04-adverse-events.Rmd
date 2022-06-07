@@ -56,8 +56,8 @@ age <- create_age(20,65)
 # adverse <- pin_get("Adverse", board = "rsconnect") %>% group_by(term) %>% summarise(count = sum(count))
 
 library(pins)
-board <- board_rsconnect("envvar", server = "http://ec2-18-216-69-78.us-east-2.compute.amazonaws.com/rsconnect", key = Sys.getenv("VETIVER_API"))
-adverse <-pin_read(board, "gt/adverse")
+board <- board_register_rsconnect()
+adverse <-pin_read(board, "biogen/adverse")
 
 ```
 
