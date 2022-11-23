@@ -6,7 +6,7 @@ output:
     theme: readable
     vertical_layout: fill
 params:
-  drug: Keytruda
+  drug: All_Drugs
 ---
 
 
@@ -57,7 +57,7 @@ age <- create_age(20,65)
 
 library(pins)
 board <- board_register_rsconnect()
-adverse <-pin_read(board, "biogen/adverse")
+adverse <-pin_read(board, "astra/adverse")
 
 ```
 
@@ -67,18 +67,18 @@ Column
 ### All Events
 
 ```{r}
-adverse %>% 
-  group_by(term) %>% 
+adverse %>%
+  group_by(drug, term) %>% 
   summarise(count = sum(count)) %>% 
   ggplot() +
-    geom_bar(aes(reorder(term,count), count), stat = 'identity') +
-    coord_flip() +
-    labs(
-      title = params$drug,
-      x = NULL,
-      y = NULL
-    ) +
-    theme_minimal()
+  facet_wrap(~drug) +
+  geom_bar(aes(reorder(term,count), count), stat = 'identity') +
+  coord_flip() +
+  labs(
+    x = NULL,
+    y = NULL
+  ) +
+  theme_minimal()
 ```
 
 

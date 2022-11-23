@@ -1,9 +1,5 @@
 ---
 title: "Adverse Events Phil"
-resource_files:
-- .httr-oauth .Renviron
-- .httr-oauth
-- .Renviron
 runtime: shiny
 output:
   flexdashboard::flex_dashboard:
@@ -34,11 +30,11 @@ Column {.sidebar}
 
 ```{r inputs}
 
-#This to be replaced by pins pull
+#This was replaced by pins pull
 
 library(pins)
 board <- board_register_rsconnect()
-adverseBase <-pin_read(board, "cole/adverse")
+adverseBase <-pin_read(board, "astra/adverse")
 
 drugs <- unique(adverseBase$drug)
 
