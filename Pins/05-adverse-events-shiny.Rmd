@@ -1,0 +1,97 @@
+---
+title: "Adverse Events Phil"
+runtime: shiny
+output:
+  flexdashboard::flex_dashboard:
+    css: styles.css
+    orientation: columns
+    theme: readable
+    vertical_layout: fill
+---
+
+
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(stringr)
+library(openfda)
+library(dplyr)
+library(ggplot2)
+library(ggthemes)
+
+# %d is a placeholder for a integer variable inside a string
+create_age <- function(min, max){#
+  sprintf('[%d+TO+%d]', min, max)
+}
+```
+
+Column {.sidebar}
+------------
+
+```{r inputs}
+
+#This was replaced by pins pull
+
+library(pins)
+board <- board_register_rsconnect()
+adverseBase <-pin_read(board, "YourConnectName/adverse")
+
+drugs <- unique(adverseBase$drug)
+
+
+shiny::selectInput("sel_name", "Brand Name Drug", choices = drugs, selected = drugs[0])
+
+adverse <- reactive({
+  adverseBase %>%
+    filter(drug == input$sel_name)
+})
+
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### All Events
+
+```{r}
+renderPlot({
+  req(adverse())
+  adverse() %>% 
+  group_by(term) %>% 
+  summarise(count = sum(count)) %>% 
+  ggplot() +
+    geom_bar(aes(reorder(term,count), count), stat = 'identity') +
+    coord_flip() +
+    labs(
+      title = input$sel_name,
+      x = NULL,
+      y = NULL
+    ) +
+    theme_minimal()
+})
+
+```
+
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Events by Gender
+
+```{r}
+renderPlot({
+  req(adverse())
+  ggplot(adverse()) +
+    geom_bar(aes(reorder(term,count), count, fill = gender), stat = 'identity') +
+    facet_wrap(~gender)+
+    coord_flip() +
+    labs(
+      title = input$sel_name,
+      x = NULL,
+      y = NULL
+    ) +
+    theme_minimal() + 
+    guides(fill = FALSE) + 
+    scale_fill_manual(values = c("#d54a30","#4c83b6"))
+})
+```
