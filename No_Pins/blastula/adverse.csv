@@ -1,0 +1,61 @@
+term,count,drug,gender
+FATIGUE,11248,Aspirin,male
+DYSPNOEA,10314,Aspirin,male
+DIARRHOEA,8785,Aspirin,male
+DIZZINESS,8404,Aspirin,male
+DRUG INEFFECTIVE,8348,Aspirin,male
+MYOCARDIAL INFARCTION,8059,Aspirin,male
+"NAUSEA",7806,Aspirin,male
+ASTHENIA,7111,Aspirin,male
+FLUSHING,6746,Aspirin,male
+GASTROINTESTINAL HAEMORRHAGE,6597,Aspirin,male
+DRUG INEFFECTIVE,550,Fexofenadine,male
+EXTRA DOSE ADMINISTERED,190,Fexofenadine,male
+FATIGUE,158,Fexofenadine,male
+DIARRHOEA,156,Fexofenadine,male
+PRODUCT QUALITY ISSUE,148,Fexofenadine,male
+HEADACHE,143,Fexofenadine,male
+PRURITUS,132,Fexofenadine,male
+DYSPNOEA,125,Fexofenadine,male
+DIZZINESS,122,Fexofenadine,male
+"NAUSEA",117,Fexofenadine,male
+DRUG INEFFECTIVE,14071,Etanercept,male
+INJECTION SITE PAIN,9405,Etanercept,male
+PSORIASIS,9018,Etanercept,male
+ARTHRALGIA,8726,Etanercept,male
+PAIN,6987,Etanercept,male
+RHEUMATOID ARTHRITIS,5746,Etanercept,male
+PAIN IN EXTREMITY,5170,Etanercept,male
+INJECTION SITE ERYTHEMA,4791,Etanercept,male
+OFF LABEL USE,4112,Etanercept,male
+"NASOPHARYNGITIS",4102,Etanercept,male
+"NAUSEA",13735,Aspirin,female
+FATIGUE,12708,Aspirin,female
+DIARRHOEA,11375,Aspirin,female
+DYSPNOEA,11009,Aspirin,female
+DRUG INEFFECTIVE,10648,Aspirin,female
+HEADACHE,10084,Aspirin,female
+DIZZINESS,9758,Aspirin,female
+PAIN,8760,Aspirin,female
+FALL,8579,Aspirin,female
+VOMITING,7951,Aspirin,female
+DRUG INEFFECTIVE,1140,Fexofenadine,female
+"NAUSEA",465,Fexofenadine,female
+HEADACHE,448,Fexofenadine,female
+FATIGUE,415,Fexofenadine,female
+EXTRA DOSE ADMINISTERED,388,Fexofenadine,female
+DIZZINESS,370,Fexofenadine,female
+DIARRHOEA,334,Fexofenadine,female
+PRURITUS,312,Fexofenadine,female
+INSOMNIA,304,Fexofenadine,female
+SOMNOLENCE,266,Fexofenadine,female
+DRUG INEFFECTIVE,49820,Etanercept,female
+INJECTION SITE PAIN,41796,Etanercept,female
+INJECTION SITE ERYTHEMA,32546,Etanercept,female
+RHEUMATOID ARTHRITIS,32466,Etanercept,female
+ARTHRALGIA,29977,Etanercept,female
+PAIN,29194,Etanercept,female
+FATIGUE,20271,Etanercept,female
+INJECTION SITE SWELLING,18005,Etanercept,female
+INJECTION SITE PRURITUS,17764,Etanercept,female
+PAIN IN EXTREMITY,17504,Etanercept,female

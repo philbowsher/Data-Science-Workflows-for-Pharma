@@ -57,7 +57,7 @@ age <- create_age(20,65)
 
 library(pins)
 board <- board_register_rsconnect()
-adverse <-pin_read(board, "YourConnectName/adverse")
+adverse <-pin_read(board, "phil-test/adverse")
 
 ```
 

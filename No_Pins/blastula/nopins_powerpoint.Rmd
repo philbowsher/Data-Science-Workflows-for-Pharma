@@ -1,0 +1,99 @@
+---
+title: "Adverse Events Report"
+output: powerpoint_presentation
+date: "`r Sys.Date()`"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(openfda)
+library(dplyr)
+library(ggplot2)
+library(ggthemes)
+library(purrr)
+library(gt)
+library(tidyr)
+library(blastula)
+library(stringr)
+library(readr)
+```
+
+Next, we'll write some helper functions to use the openFDA API and package to query adverse events data.
+```{r, include=FALSE}
+get_adverse <- function(gender, brand_name, age) {
+  my_query <- fda_query("/drug/event.json")
+
+  map_df(c("Aspirin", "Fexofenadine", "Etanercept"), function(drug) {
+    df = my_query %>%
+    fda_filter("patient.patientsex", gender) %>% 
+    fda_filter("patient.drug.openfda.generic_name", drug) %>% 
+    fda_count("patient.reaction.reactionmeddrapt.exact") %>% 
+    fda_limit(10) %>% 
+    fda_exec()
+    df$drug = drug
+    df
+  })
+}
+
+create_age <- function(min, max){#
+  sprintf('[%d+TO+%d]', min, max)
+}
+```
+
+
+
+Using our openFDA helper functions, we can pull adverse event data by gender for a specific drug and age range. We can also lookup the drug's active ingredients.
+
+```{r pull-data, include=FALSE}
+# specify drug
+# c("Aspirin", "Fexofenadine", "Clonazepam")
+drug <- "Aspirin"
+
+# specify age range
+age <- create_age(20,65)
+
+# get adverse event data from the openfda API
+jnk <- capture.output(male <- get_adverse("1", drug, age))
+if (!is.null(male)) {
+  male$gender <- 'male'
+}
+jnk <- capture.output(female <- get_adverse("2", drug, age))
+if (!is.null(female)) {
+  female$gender <- 'female'
+}
+
+# comnbine male and female event data
+adverse <- rbind(male, female)
+
+adverse
+```
+
+
+## plot
+
+```{r ae_plot, echo=FALSE, message = FALSE}
+
+adverse %>%
+  group_by(drug, term) %>% 
+  summarise(count = sum(count)) %>% 
+  ggplot() +
+  facet_wrap(~drug) +
+  geom_bar(aes(reorder(term,count), count), stat = 'identity') +
+  coord_flip() +
+  labs(
+    x = NULL,
+    y = NULL
+  ) +
+  theme_minimal()
+
+
+
+```
+
+## data
+
+```{r greater_30000_ae, echo=FALSE, message = FALSE}
+adverse %>% filter(count > 30000)
+```
+
+

@@ -1,0 +1,138 @@
+---
+title: "Main Document"
+output: html_document
+---
+
+# Adverse Events
+
+## Accessing Data
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(openfda)
+library(dplyr)
+library(ggplot2)
+library(ggthemes)
+library(purrr)
+library(gt)
+library(tidyr)
+library(blastula)
+library(stringr)
+library(readr)
+```
+
+Next, we'll write some helper functions to use the openFDA API and package to query adverse events data.
+```{r}
+get_adverse <- function(gender, brand_name, age) {
+  my_query <- fda_query("/drug/event.json")
+
+  map_df(c("Aspirin", "Fexofenadine", "Etanercept"), function(drug) {
+    df = my_query %>%
+    fda_filter("patient.patientsex", gender) %>% 
+    fda_filter("patient.drug.openfda.generic_name", drug) %>% 
+    fda_count("patient.reaction.reactionmeddrapt.exact") %>% 
+    fda_limit(10) %>% 
+    fda_exec()
+    df$drug = drug
+    df
+  })
+}
+
+create_age <- function(min, max){#
+  sprintf('[%d+TO+%d]', min, max)
+}
+```
+
+
+
+Using our openFDA helper functions, we can pull adverse event data by gender for a specific drug and age range. We can also lookup the drug's active ingredients.
+
+```{r pull-data}
+# specify drug
+# c("Aspirin", "Fexofenadine", "Clonazepam")
+drug <- "Aspirin"
+
+# specify age range
+age <- create_age(20,65)
+
+# get adverse event data from the openfda API
+jnk <- capture.output(male <- get_adverse("1", drug, age))
+if (!is.null(male)) {
+  male$gender <- 'male'
+}
+jnk <- capture.output(female <- get_adverse("2", drug, age))
+if (!is.null(female)) {
+  female$gender <- 'female'
+}
+
+# comnbine male and female event data
+adverse <- rbind(male, female)
+
+adverse
+```
+
+
+Here is some **R** code, which is contained within a code chunk:
+
+```{r ae_plot}
+
+adverse %>%
+  group_by(drug, term) %>% 
+  summarise(count = sum(count)) %>% 
+  ggplot() +
+  facet_wrap(~drug) +
+  geom_bar(aes(reorder(term,count), count), stat = 'identity') +
+  coord_flip() +
+  labs(
+    x = NULL,
+    y = NULL
+  ) +
+  theme_minimal()
+
+
+
+```
+
+```{r ae_table}
+adverse %>%  
+  mutate(term=str_to_title(term)) %>% 
+  pivot_wider(names_from=gender, values_from=count) %>% 
+  mutate(Total=female+male) %>% 
+  top_n(10, Total) %>% 
+  gt(rowname_col="term") %>% tab_header(
+    title = md("Adverse Events"),
+    subtitle = "The top ten most reported events"
+) %>% tab_source_note("All data queried from openFDA") %>% 
+  tab_stubhead(label= 'Patient Reaction') %>% 
+  tab_spanner(label = "By sex",
+              columns = c(female, male)) %>% 
+  tab_spanner(label= 'Total Cases',
+              columns = Total) %>% 
+    fmt_number(columns = c(female, male, Total), sep_mark = ',', decimals=0) %>% 
+  cols_label(Total = '',
+             female = 'Female',
+             male= 'Male')
+
+```
+
+
+It looks like the top number of adverse events for our study XYZ is: `r adverse %>% filter(count == max(count))`. Let's create a CSV for distribution (this code chunk that generates the CSV is ultimately not shown because we used `echo=FALSE` as a chunk option).
+
+```{r write_csv, echo=FALSE}
+adverse %>% write_csv("nopins_adverse.csv")
+```
+
+We can create an email on **RStudio Connect** that aligns with the content from this report. We do this with the `render_connect_email()` and `attach_connect_email()` functions from the **blastula** package. The email subdocument (`"connect-example-email.Rmd"`) is used to craft the contents of the email, drawing upon results available in this document. Attachments for the email can added by using the arguments:
+
+- `attachments` (for any output files or included files)
+- `attach_output` (which attaches the rendered report)
+
+```{r connect_email_setup, echo=FALSE}
+render_connect_email(input = "connect-example-nopins-email.Rmd") %>%
+  attach_connect_email(
+    subject = "RStudio Connect HTML Email",
+    attach_output = TRUE,
+    attachments = c("adverse.csv")
+  )
+```
+
