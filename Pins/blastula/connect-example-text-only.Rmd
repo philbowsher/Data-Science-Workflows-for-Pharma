@@ -1,0 +1,32 @@
+---
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(blastula)
+```
+
+# An R Markdown Document for Sending an Email
+
+We can create a text-only email using **RStudio Connect**. Only one function is required: `attach_connect_email()`. Files can be attached using the `attachments` argument.
+
+None of the content from this R Markdown file will be included in the email message body, but, if we wanted to, we could elect to attach the output file using `attach_output = TRUE`.
+
+```{r connect_email, echo=FALSE}
+attach_connect_email(  
+  subject = "RStudio Connect AE Text Email",
+  attachments = "adverse.csv",
+  text = "
+
+Hello,
+
+This is a test email. It contains only text and it's a great option if you only want to send a simple email for your AEs.
+
+We can still include attachments. Here, a CSV file is attached to this email (`adverse.csv`).
+
+"
+)
+```
+

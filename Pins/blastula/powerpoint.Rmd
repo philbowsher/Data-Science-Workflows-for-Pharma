@@ -1,0 +1,79 @@
+---
+title: "Adverse Events Report"
+output: powerpoint_presentation
+date: "`r Sys.Date()`"
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyr)
+library(blastula)
+library(stringr)
+library(openfda)
+library(dplyr)
+library(ggplot2)
+library(ggthemes)
+library(gt)
+library(readr)
+```
+
+## An R Markdown Document (Main Report)
+
+This is an **R Markdown** document. *Markdown* is a simple formatting syntax for writing on the web. **R Markdown** takes this a step further by combining *Markdown* prose and **R** code into reproducible documents that can be output as HTML, PDF, Word, and many more output formats. For more details on using **R Markdown**, have a look through [its documentation site](https://rmarkdown.rstudio.com/docs/).
+
+Let's get our data
+
+```{r, include=FALSE}
+#this to be replaced by pins pull!
+
+drug <- "All_Drugs"
+
+# age <- create_age(20,65)
+
+# jnk <- capture.output(male <- get_adverse("1", params$drug, age))
+# if (!is.null(male)) {
+#  male$gender <- 'male'
+# }
+
+# jnk <- capture.output(female <- get_adverse("2", params$drug, age))
+# if (!is.null(female)) {
+#  female$gender <- 'female'
+# }
+
+# adverse <- rbind(male, female)
+
+# adverse <- pin_get("Adverse", board = "rsconnect") %>% group_by(term) %>% summarise(count = sum(count))
+
+library(pins)
+board <- board_register_rsconnect()
+adverse <-pin_read(board, "phil-test/adverse")
+
+```
+
+## plot
+
+```{r ae_plot, echo=FALSE, message = FALSE}
+
+adverse %>%
+  group_by(drug, term) %>% 
+  summarise(count = sum(count)) %>% 
+  ggplot() +
+  facet_wrap(~drug) +
+  geom_bar(aes(reorder(term,count), count), stat = 'identity') +
+  coord_flip() +
+  labs(
+    x = NULL,
+    y = NULL
+  ) +
+  theme_minimal()
+
+
+
+```
+
+## data
+
+```{r greater_30000_ae, echo=FALSE, message = FALSE}
+adverse %>% filter(count > 30000)
+```
+
+
